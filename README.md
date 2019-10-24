@@ -8,7 +8,7 @@ This tools is designed for Pixelworks employees, customers and vendors to access
 Quick Installation
 ------
 
-```bash
+```
 $ git clone https://github.com/pixelworksIT/pw-aws-app-cli.git
 $ cd pw-aws-app-cli
 $ pip3 install .
@@ -21,7 +21,7 @@ Usage
 
 ### Get Authenticated and Authorized
 
-```bash
+```
 $ pw-app-authz-cli --help
 usage: pw-app-authz-cli [-h] -u USERNAME [-s] [-P] -a APPNAME [-C]
                         [-M MFACODE]
@@ -46,19 +46,19 @@ optional arguments:
 
 For Pixelworks employees to get access to Git service
 
-```bash
+```
 $ pw-app-authz-cli -u example@pixelworks.com -P -a Git -M 123456
 ```
 
 For other users
 
-```bash
+```
 $ pw-app-authz-cli -u example@abc.com -a Git
 ```
 
 Save your password in text file to avoid input password
 
-```bash
+```
 $ touch ~/.mypass
 $ chmod 600 ~/.mypass
 $ echo "Uor#Pas5w0rd" > ~/.mypass
@@ -73,7 +73,7 @@ In above examples, a profile named "Git" is created. Then you can access corresp
 
 For example:
 
-```bash
+```
 $ aws --profile Git codecommit create-repository ...
 ```
 
