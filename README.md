@@ -77,6 +77,19 @@ For example:
 $ aws --profile Git codecommit create-repository ...
 ```
 
+### The Real Credential Provider
+
+Open file `~/.aws/credentials` , find section `[Git]`, as used in above example. It looks like following
+
+```
+[Git]
+credential_process = pw-app-authz-renew --app-name Git
+```
+
+Here you will mention the command `pw-app-authz-renew` . It is the command that providing real AWS credential to AWS command line tool and applications based on AWS SDK. It is installed along with `pw-app-authz-cli` .
+
+In case the command is not in PATH, please update the configuration with full path to `pw-app-authz-renew`, in `~/.aws/credentials` .
+
 Known Common Errors
 ------
 
