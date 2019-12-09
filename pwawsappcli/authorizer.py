@@ -106,6 +106,9 @@ def command():
     aws_region = u''
     app_name = args.a[0]
     mfa_code = args.M[0]
+    # Extra value for UI matching
+    ui_aws_region = u''
+    ui_user_type = u''
 
     # Get the password first
     if args.s:
@@ -127,19 +130,25 @@ def command():
     # Determine region and login API URL
     if args.C:
         # China regions is selected
+        ui_aws_region = u'china'
         aws_region = c_authz[u'CONF_REGION_C']
         # By default, we assume 3rd party account
+        ui_user_type = u'3rd'
         aws_api_url = c_authz[u'API_URL_C_3RD']
         if args.P:
             # Pixelworks account
+            ui_user_type = u'pw'
             aws_api_url = c_authz[u'API_URL_C_PW']
     else:
         # Use global regions
+        ui_aws_region = u'global'
         aws_region = c_authz['CONF_REGION_G']
         # By default, we assume 3rd party account
+        ui_user_type = u'3rd'
         aws_api_url = c_authz[u'API_URL_G_3RD']
         if args.P:
             # Pixelworks account
+            ui_user_type = u'pw'
             aws_api_url = c_authz[u'API_URL_G_PW']
 
     # Hold response string
@@ -220,7 +229,10 @@ def command():
         aws_conf[app_conf_section_name] = {
             u'region': aws_region,
             u'output': u'json',
-            u'app_session_id': login_data[u'AppSessionId']
+            u'app_session_id': login_data[u'AppSessionId'],
+            u'ui_user_id': u_username,
+            u'ui_user_type': ui_user_type,
+            u'ui_aws_region': ui_aws_region
         }
         # Set config for _cache profile
         aws_conf[app_cache_conf_section_name] = {
